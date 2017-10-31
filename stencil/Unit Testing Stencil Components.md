@@ -24,9 +24,9 @@ The only packages required in order to run the tests are `jest` and `@types/jest
 
 ```
   "devDependencies": {
-	...
-	"@types/jest": "^21.1.1",
-	"jest": "^21.2.1"
+    ...
+    "@types/jest": "^21.1.1",
+    "jest": "^21.2.1"
   },
 ```
 
@@ -34,9 +34,9 @@ The two testing related npm scripts are `test` and `test.watch`.
 
 ```
   "scripts": {
-	...
-	"test": "jest --no-cache",
-	"test.watch": "jest --watch --no-cache"
+    ...
+    "test": "jest --no-cache",
+    "test.watch": "jest --watch --no-cache"
   },
 ```
 
@@ -44,17 +44,17 @@ The jest setup section specifies the [moduleFileExtensions](http://facebook.gith
 
 ```json
   "jest": {
-	  "transform": {
-  	  "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
-	  },
-	  "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
-	  "moduleFileExtensions": [
-  	  "ts",
-  	  "tsx",
-  	  "js",
-  	  "json",
-  	  "jsx"
-	  ]
+    "transform": {
+      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx"
+    ]
   }
 ```
 
