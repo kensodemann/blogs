@@ -1,20 +1,20 @@
 # Using ngModel with Stencil Components
 
-[Stencil](https://stenciljs.com) is a tool for building modern Web Components. Stencil combines some of the best features from traditional frameworks, but outputs 100% standards-compliant Custom Elements, part of the Web Component spec. The Web Component collections created with Stencil can then be used in projects that use any application framework, including no framework at all.
+[Stencil](https://stenciljs.com) is a tool for building modern Web Components. Stencil combines some of the best features from traditional frameworks but outputs 100% standards-compliant Custom Elements, part of the Web Component spec. The Web Component collections created with Stencil can then be used in projects that use any application framework, including no framework at all.
 
 When you create a component that will be used in a form you want to be able to bind it to an [NgModel](https://angular.io/api/forms/NgModel). This article explains how to integrate your Web Components into forms on [Angular](https://angular.io) projects using [Control Value Accessors](https://angular.io/api/forms/ControlValueAccessor). A control value accessor is an interface that acts as a bridge between your component and the Angular forms API, allowing you to use ngModel, form validation, and the like with your component.
 
 ### Creating a Component
 
-When creating your components, there are a few guidelines that you should follow to make sure you component will work well with Angular or other frameworks:
+When creating your components, there are a few guidelines that you should follow to make sure your component will work well with Angular or other frameworks:
 
-1. Make small, concrete UI components. Generally, these components should represent leaf nodes, and are objects that cannot be broken down further.
-1. Break monolithic components into smaller components. For example, if you have a list if items, do not just have a single component for the list that is set up via JavaScript, but have a list component that itself contains item components.
+1. Make small, concrete UI components. Generally, these components should represent leaf nodes and are objects that cannot be broken down further.
+1. Break monolithic components into smaller components. For example, if you have a list if items, do not just have a single component for the list that is set up via JavaScript. Rather, have a list component that itself contains item components.
 1. Use attributes and properties to configure the component.
 1. Use properties rather than methods to change the state of the component.
 1. Use events to listen for changes in the control.
 
-Following these guidelines makes the components that you are designing work just like existing HTML elements. This is just general good design, and results in components that will integrate well with existing frameworks.
+Following these guidelines makes the components that you are designing work just like existing HTML elements. This is just general good design and results in components that will integrate well with existing frameworks.
 
 ### Wiring it Up
 
@@ -24,21 +24,21 @@ Given a small, concrete UI component that uses a `value` property for its input 
 <my-special-input [value]="myData" (input)="myData=$event.target.value"></my-special-input>
 ```
 
-This gets us our two-way binding in so far as `myData`'s value is concerned. However, in Angular, we really want to use `ngModel` so we can take avantage of features such as form validations. Something like this: 
+This gets us our two-way binding in so far as `myData`'s value is concerned. However, in Angular, we really want to use `ngModel` so we can take advantage of features such as form validations. Something like this: 
 
 ```html
 <my-special-input [(ngModel)]="myData"></my-checkbox>
 ```
 
-This makes our custom input element behave just like a standard input element. The good news is that this is not only possible, but is also very easy to do via the use of Control Value Accessors.
+This makes our custom input element behave just like a standard input element. The good news is that this is not only possible but is also very easy to do via the use of Control Value Accessors.
 
 #### Using Default Control Value Accessor
 
-The API convensions that have been established for inputs is that it has a property called `value` that is used to set and change the state of the input. Changes that the input makes to the value as the user interacts with it are communicated back via the `input` event.
+The API conventions that have been established for inputs is that it has a property called `value` that is used to set and change the state of the input. Changes that the input makes to the value as the user interacts with it are communicated back via the `input` event.
 
 If you have a custom element that follows these conventions, you can use `ngModel` with it by using the [Default Value Accessor](https://angular.io/api/forms/DefaultValueAccessor) via the `ngDefaultControl` directive.
 
-For example, the following custom element follows the `input` API convensions:
+For example, the following custom element follows the `input` API conventions:
 
 ```tsx
 import { Component, Prop, PropWillChange } from '@stencil/core';
@@ -110,9 +110,9 @@ The `ngDefaultControl` directive tells Angular to use the [Default Value Accesso
 
 #### Creating a Custom Control Value Accessor
 
-There may be cases where the API convensions established for inputs do not make sense or cases where you are interfacing to a component someone else made and they did not follow those convensions. In those cases, you can create your own custom control value accessor.
+There may be cases where the API conventions established for inputs do not make sense or cases where you are interfacing to a component someone else made and they did not follow those conventions. In those cases, you can create your own custom control value accessor.
 
-Here is a custom element that allows the user to pick from the list of names that all end in "illy". It could easily follow the `input` API convensions, but it does not. Instead, it uses the `illy` to input the state and the `illyChange` event to signal user interaction. It is a rather silly component, but it will do for the illustration.
+Here is a custom element that allows the user to pick from the list of names that all end in "illy". It could easily follow the `input` API conventions, but it does not. Instead, it uses the `illy` to input the state and the `illyChange` event to signal user interaction. It is a rather silly component, but it will do for the illustration.
 
 ```tsx
 import { Component, Event, EventEmitter, Prop, PropWillChange, State } from '@stencil/core';
@@ -160,7 +160,7 @@ export class IllyPicker {
 }
 ```
 
-We could wire this up to effectivley have a two way binding as follows:
+We could wire this up to effectively have a two-way binding as follows:
 
 ```HTML
 <div>
@@ -213,9 +213,9 @@ The key methods here are:
 
 Notice how this code matches up to the way we wired up the custom element without using `ngModel`.
 
-Also notice the selector that was used. I chose to use the tag for my custom element, meaning that this Control Value Accessor only works for this specific custom element. The selector could be an array of custom element tags, or a more generic string like `illyValueAccessorDirective` if this is more generic API that will be used across serveral different custom elements, similar to how `ngDefaultControl` works. Use whatever makes sense.
+Also, notice the selector that was used. I chose to use the tag for my custom element, meaning that this Control Value Accessor only works for this specific custom element. The selector could be an array of custom element tags, or a more generic string like `illyValueAccessorDirective` if this is more generic API that will be used across several different custom elements, similar to how `ngDefaultControl` works. Use whatever makes sense.
 
-Now that we have the Control Value Accessor in place and associted with our custom element tag we are able to use `ngModel` as such:
+Now that we have the Control Value Accessor in place and associated with our custom element tag we are able to use `ngModel` as such:
 
 ```html
 <div>
@@ -226,7 +226,7 @@ Now that we have the Control Value Accessor in place and associted with our cust
 
 ### Sample Code
 
-I have a couple of sample applications that show this code at work. Feel free to fork these repos and explore further.
+I have a couple of sample applications that show this code at work. Please feel free to fork these repositories and explore further.
 
 * [Test Components](https://github.com/kensodemann/test-components) - the component collection
 * [Test Components Usage](https://github.com/kensodemann/test-components-usage) - an Angular application that uses the components
