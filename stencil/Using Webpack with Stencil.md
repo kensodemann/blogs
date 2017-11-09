@@ -63,11 +63,11 @@ const stencil = require('@stencil/webpack');
 
 ```
 
-The plugin constructor takes a configuration object. At this time, the only property in this object is the `collections` property. A configuration object is used rather than a sipmle list of files in order to support the easy addition of options in the future.
+The plugin constructor takes a configuration object. At this time, the only property in this object is the `collections` property. A configuration object is used rather than a simple list of files in order to support the easy addition of options in the future.
 
 The `collections` property contains an array of component collections you would like to use. If you only have one collection, you can specify just a string instead of an array of strings.
 
-The component collections do not have to be installed in `node-modules` if you do not want to publish them to an NPM registry (though publishing them to either the public registry or to a private registry is suggested). You could, for example, install them in a `web-components` directory if you so desired. Manually copying the component collections as such is beyond the scope of this document.
+The component collections do not have to be installed in `node-modules` if you do not want to publish them to an NPM registry (though publishing them to either the public registry or to a private registry is suggested). You could, for example, install them in a `web-components` directory if so desired. Manually copying the component collections as such is beyond the scope of this document.
 
 Once you have this set up, a build (`npm run build` for example) will copy the components to a `build` directory under the output directory for the build following usual Stencil conventions.
 
