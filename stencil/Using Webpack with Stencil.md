@@ -2,11 +2,11 @@
 
 Many applications are built using Webpack. Stencil provides a Webpack plugin that makes it easy to include web components that have been built using Stencil in your Webpack built application.
 
-Please note that the webpack plugin is not required to use web components built with stencil in other applications. This plugin just gives you an option to use if your application relies heavily on webpack.
+Please note that the Webpack plugin is not required to use web components built with Stencil in other applications. This plugin just gives you an option to use if your application relies heavily on Webpack.
 
 ### Installing the Plugin
 
-To install the Stecil Webpack Plugin in your project, use `npm` (or `yarn`) and save it as a development dependency. For example:
+To install the Stencil Webpack Plugin in your project, use `npm` (or `yarn`) and save it as a development dependency. For example:
 
 ```
 npm install @stencil/webpack --save-dev
