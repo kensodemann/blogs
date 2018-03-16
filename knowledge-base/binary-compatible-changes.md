@@ -18,7 +18,7 @@ The native plugins are a bridge between the web application and specific APIs in
 
 ## Changes that are Binary Compatible
 
-So long as _only_ items that are contained within the "Web App" portion of the [Application Architecture](https://cordova.apache.org/docs/en/latest/guide/overview/index.html#architecture), the application is still "binary compatible" and the update can be delivered via the Ionic Pro deploy service. This includes:
+So long as _only_ items that have been changed are contained within the "Web App" portion of the [Application Architecture](https://cordova.apache.org/docs/en/latest/guide/overview/index.html#architecture), the application is still "binary compatible" and the update can be delivered via the Ionic Pro deploy service. This includes:
 
 * JavaScript / TypeScript logic
 * SASS / CSS styling
