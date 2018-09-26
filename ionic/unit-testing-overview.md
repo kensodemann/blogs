@@ -6,7 +6,7 @@ Since we are using the Angular CLI to do most of the heavy lifting, most of the 
 
 ## The Role of Testing
 
-Why write unit tests in the first place? Writing tests may add some time to the initial development effort. That extra effort often pays for itself over time with a reduced maintenance effort. Well written tests allow:
+Why write unit tests in the first place? Writing tests may add some time to the initial development effort. However, that extra effort pays for itself over time in the form of reduced maintenance costs. Well written tests allow:
 
 * bugs to be found and fixed earlier in the development cycle when they are cheaper and easier to fix
 * features or bug fixes to be added without introducing new bugs
@@ -17,6 +17,7 @@ Notice the emphasis on uncovering bugs. That is intentional. The purpose of test
 
 Keeping these goals in mind, good test suites have the following attributes:
 
+* the tests are fast, independent, and repeatable
 * the test are expandable, understandable, and maintainable
 * the tests validate a wide variety of different inputs 
 * the tests handle edge cases and limits
