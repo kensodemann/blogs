@@ -65,8 +65,6 @@ We will dive into this step in more detail in its own section of this walkthroug
 
 **Important:** Your project may run just fine after the first phase, but you should still have a look at this phase. There are important steps here that will allow you to take full advantage of using Capacitor as your native layer.
 
-Use the navigation items in the header to see each of these phases in detail.
-
 ## Getting Started: Create a Cordova App
 
 Let's create a very simple Cordova application to use for this tutorial. This application will just be one of Ionic's starter applications with the minimal Cordova plugins included.
