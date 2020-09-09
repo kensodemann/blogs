@@ -15,9 +15,12 @@ Before performing this process on any of your own applications, we suggest that 
 
 ## Overview
 
-There are two main phases of any conversion from Cordova to Capacitor: Basic Configuration and Project Cleanup.
+There are two main phases of any conversion from Cordova to Capacitor
 
-### Phase 1: Basic Configuration
+- Basic Configuration
+- Project Cleanup.
+
+### Basic Configuration
 
 The goal of this phase is to get Capacitor installed in your project and the native projects created and building. This phase generally takes 15 minutes or less to complete, and often results in a fully functional application. Here are the full steps to this phase:
 
@@ -48,9 +51,9 @@ $ ionic cap open android
 
 At the end of this process, many apps will already be working fine. Other apps may require minor tweaks due to issues with plugin configuration, but those will be addressed in the "Cleanup" section.
 
-### Phase 2: Project Cleanup
+### Project Cleanup
 
-Phase 2 has three main goals:
+The project cleanup phase has three main goals:
 
 - Configure remaining Cordova plugins where needed
 - Replace Cordova plugins with Capacitor Plugins or APIs where possible
@@ -64,7 +67,7 @@ We will dive into this step in more detail in its own section of this walkthroug
 
 Use the navigation items in the header to see each of these phases in detail.
 
-## Create a Cordova App
+## Getting Started: Create a Cordova App
 
 Let's create a very simple Cordova application to use for this tutorial. This application will just be one of Ionic's starter applications with the minimal Cordova plugins included.
 
