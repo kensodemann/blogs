@@ -94,36 +94,7 @@ We now have a fully functional, though minimal, Cordova application. In the next
 
 ## Phase 1: Install and Cofigure Capacitor
 
-Installing and configuring Capacitor is a multi-step process, but each step is very small. The full set of steps looks like this:
-
-```bash
-# Step 1
-# Always work in a dedicated branch, NEVER work directly in the main branch of your application
-$ git checkout -b feature/convertToCapacitor
-
-# Step 2
-$ ionic integration enable capacitor
-
-# Step 3
-edit capacitor.config.json
-
-# Step 4
-# Note: if you have never built your project, do "npm run build" first
-$ ionic cap add ios
-$ ionic cap add android
-
-# Step 5
-$ cordova-res ios --skip-config --copy
-$ cordova-res android --skip-config --copy
-
-# Step 6
-$ ionic cap open ios
-$ ionic cap open android
-```
-
-At the end of this process, many apps will already be working. Other apps may require minor tweaks due to issues with plugin configuration, but those will be addressed in the "Cleanup" phase.
-
-Let's have a look at each of the above steps in detail.
+Installing and configuring Capacitor is a multi-step process, but each step is very small.
 
 ### Create a Working Branch
 
