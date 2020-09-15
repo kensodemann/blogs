@@ -8,12 +8,9 @@ This tutorial walks through the conversion process using a simple Cordova applic
 Before performing this process on any of your own applications, we suggest that you:
 
 - **Complete this tutorial with the sample application** - this will allow you to fully understand the process and the various steps taken in a controlled environment.
-- **Clean up your Cordova dependencies** - Capacitor is great, but it is not a magic bullet. If your application currently has a lot of plugins installed, that is going to hamper your progress. Simplification is the key here. We suggest that you do the following in your Cordova application before performing the conversion:
-   - remove any unused plugins
-   - review your use of plugins to ensure you need the ones you are using
-   - review the versions of your plugins to ensure you are up to date on your versions
+- **Clean up your Cordova dependencies** - Capacitor is great, but it is not a magic bullet. If your application currently has a lot of plugins installed make sure you are using them, that they are absolutely needed by your application, and that they are up to date. Proper plugin management will make migration easier.
 
-## Overview
+## Overview of the Process
 
 There are two main phases of any conversion from Cordova to Capacitor
 
@@ -63,9 +60,17 @@ This step takes about 30-6o minutes for simple projects but can take significant
 
 We will dive into this step in more detail in its own section of this walkthrough.
 
-**Important:** Your project may run just fine after the first phase, but you should still have a look at this phase. There are important steps here that will allow you to take full advantage of using Capacitor as your native layer.
+## Overview of the Tutorial
 
-## Getting Started: Create a Cordova App
+For this tutorial, we will:
+
+- Create a very simple Cordova application
+- Install and Configure Capacitor in the simple Cordova application
+- Perform the project cleanup
+
+We suggest that you follow this process once just to get your bearings before trying this with your own application.
+
+### Getting Started: Create a Cordova App
 
 Let's create a very simple Cordova application to use for this tutorial. This application will just be one of Ionic's starter applications with the minimal Cordova plugins included.
 
@@ -92,11 +97,11 @@ $ ionic cordova platform add android
 
 We now have a fully functional, though minimal, Cordova application. In the next section, we will perform phase one of our conversion: installing and configuring Capacitor.
 
-## Phase 1: Install and Cofigure Capacitor
+### Phase 1: Install and Cofigure Capacitor
 
 Installing and configuring Capacitor is a multi-step process, but each step is very small.
 
-### Create a Working Branch
+#### Create a Working Branch
 
 You should never ever do any work in the main branch of your application. You should always use a "branch and merge" strategy for every change you make, even if you are the only developer on your application. This way, should you decide that whatever changes you are making are not a path you want to go down, you just need to abandon the branch rather than undo a bunch of commits. This advice holds especially true here where you are replacing a whole section of your stack. Even though this process is very easy, you should still approach it with care.
 
@@ -106,7 +111,7 @@ git checkout -b feature/convertToCapacitor
 
 Also remember to commit early and commit often. Always make small commits as you go, and then squash them into a single commit before merging your branch into the main branch.
 
-### Integrate Capacitor
+#### Integrate Capacitor
 
 ```bash
 $ ionic integration enable capacitor
@@ -114,7 +119,7 @@ $ ionic integration enable capacitor
 
 This command installs `@capacitor/core` and `@capacitor/cli` in your project and creates a template basic `capacitor.config.json` file.
 
-### Edit `capacitor.config.json`
+#### Edit `capacitor.config.json`
 
 Have a look at the newly created `capacitor.config.json` file:
 
@@ -154,7 +159,7 @@ Change the `appId` and the `appName` to match what you currently have in the `co
   ...
 ```
 
-### Add the iOS and Android Platforms
+#### Add the iOS and Android Platforms
 
 Let's add the iOS and Android platforms:
 
@@ -192,7 +197,7 @@ The output of these two commands is similar. Notice that the Compatible Cordova 
 
 Unlike Cordova, where the platforms are build artifacts, and thus cannot be directly touched, these platforms are source artifacts and are fully under your control. That means no more trying to manipulate the platforms via weird directives in the `config.xml` file or via hard to maintain hooks. Yes!! 🎉
 
-### Add the Icons and Slash Screen
+#### Add the Icons and Slash Screen
 
 The final step is to initialize the newly created projects with the icon and splash screen from our original project. Since our original project already has `icon.png` and `splash.png` template files in the `resources` directory, all we have to do is use the `cordova-res` script to copy them to our newly generated platforms.
 
@@ -203,9 +208,9 @@ $ cordova-res android --skip-config --copy
 
 If `cordova-res` produces any warnings with this step, you can ignore them.
 
-### Run the App
+#### Run the App
 
-At this point, you are able to view  your Capacitor application by loading it in either Xcode or Android Studio and running it on a devie or emulator. Use `ionic cap open` to open the appropriate IDE.
+At this point, you are able to view  your Capacitor application by loading it in either Xcode or Android Studio and running it on a device or emulator. Use `ionic cap open` to open the appropriate IDE.
 
 ```bash
 $ ionic cap open ios
@@ -215,7 +220,9 @@ $ ionic cap open android
 At this point, our basic app is fully functional as a Capacitor application. Some applications may need a little more care based on the plugins that are used and the amount of configuration that they require. In the next phase, we will clean up the application and tie up any loose ends.
 
 
-## Phase 2: Project Cleanup
+### Phase 2: Project Cleanup
+
+**Important:** any project may run fine after the first phase, but you should still have a look at the second phase. There are important steps here that will allow you to take full advantage of using Capacitor as your native layer.
 
 Cleanup involves three main steps:
 
@@ -225,7 +232,7 @@ Cleanup involves three main steps:
 
 Let's jump right in.
 
-### Replace Plugins
+#### Replace Plugins
 
 The first thing we should do in our cleanup efforts is to look for opportunities to use <a href="https://github.com/capacitor-community/" target="_blank">Capacitor Plugins</a> and <a href="https://capacitorjs.com/docs/apis" target="_blank">Capacitor's built in plugin APIs</a> instead of using Cordova plugins.
 
@@ -235,7 +242,7 @@ In the case of our application, the only Cordova plugins that are actively being
 - Modify the `AppComponent` itself to call the Capacitor APIs
 - Modify the `AppComponentModule` to no longer provide the `@ionic-native` wrappers for the Cordova plugins
 
-#### Modify `src/app/app.component.spec.ts`
+##### Modify `src/app/app.component.spec.ts`
 
 Import the `Plugins` object from `@capacitor/core`. In our case, we will also be styling the status bar, so we will need to import the `StatusBarStyle` enumeration.
 
@@ -318,7 +325,7 @@ describe('initialization', () => {
 
 You should now clean up any unsed imports or variable declarations you may have. Your `AppComponent` tests will be failing at this point, but we will fix that next.
 
-#### Modify `src/app/app.component.ts`
+##### Modify `src/app/app.component.ts`
 
 You need to modify the `AppComponent` as such:
 
@@ -353,14 +360,14 @@ export class AppComponent {
 }
 ```
 
-#### Modify `src/app/app.module.ts`
+##### Modify `src/app/app.module.ts`
 
 Since nothing is referencing the `@ionic-native` services any more, they no longer need to be provided. Remove all references to them in this file as well.
 
 - Remove the ES6 imports of them
 - Remove the code that adds them to the `providers` array
 
-### Configure Plugins
+#### Configure Plugins
 
 This step may or may not be required for your project. For the base Cordova project we are converting here it is not required at all. However, if it is required, common tasks include:
 
@@ -369,7 +376,7 @@ This step may or may not be required for your project. For the base Cordova proj
 - Handling Cordova hooks
 - Handling plugin variables
 
-#### Handling Cordova Plugin Preferences
+##### Handling Cordova Plugin Preferences
 
 If any of your Cordova plugins require preferences to be set the `config.xml` file, those preferences should be set in the `cordova` section of the `capacitor.config.json` file. These should have been automatically copied over for you during Phase 1, but you may want to double check them. Here is what I have in my project:
 
@@ -389,7 +396,7 @@ If any of your Cordova plugins require preferences to be set the `config.xml` fi
 
 **Note:** in our case, we will later remove all of these as we have replaced the use of all Cordova plugins in our application and thus will end up removing all of them. This may or may not be the case in any of your projects.
 
-#### Handling Additional `config.xml` Items
+##### Handling Additional `config.xml` Items
 
 You may have other directives in your `config.xml` file such an `edit-config` node. For example, the following `edit-config` node modifies the iOS project's `info.plist` file:
 
@@ -401,15 +408,15 @@ You may have other directives in your `config.xml` file such an `edit-config` no
 
 In these cases, the you need to update the appropriate native project yourself. So the proper question to ask yourself is "How do I configure X in iOS (or Android)?" and then go modify the proper configuration file. You can usually figure this out via the nodes in the `config.xml` file themselves.
 
-#### Handling Cordova Hooks
+##### Handling Cordova Hooks
 
 Some plugins install Cordova hooks. These can be a little trickier to deal with. If you have a plugin that does this, you need to figure out what the hooks are doing and replicate that set up yourself. The good news is, since the native projects are now source artifacts you should only need to do this once.
 
-#### Handling Cordova Plugin Variables
+##### Handling Cordova Plugin Variables
 
 Some plugins require installation time variable. If you have a plugin like this, you will need to figure out what the plugin is using that variable for and then perform the same operation in your native projects. Similar to the situation with Cordova Hooks, you should only need to do this once, however.
 
-### Remove Cordova
+#### Remove Cordova
 
 In this step, you will:
 
@@ -417,7 +424,7 @@ In this step, you will:
 - Modify the `package.json` file
 - Remove unused files from the filesystem
 
-#### Remove Unused Plugins
+##### Remove Unused Plugins
 
 Right now, the following plugins are being installed:
 
@@ -440,7 +447,7 @@ We are also no longer using any of the `@ionic-native` stuff (in your own projec
 $ npm uninstall @ionic-native/core @ionic-native/status-bar @ionic-native/splash-screen
 ```
 
-#### Modify the `package.json` File
+##### Modify the `package.json` File
 
 Open the `package.json` file and look for the `cordova` section. Remove the whole section. It will look something like the following:
 
@@ -469,7 +476,7 @@ While you are in there, find the build script. I like to add a `cap copy` comman
     "build": "ng build && cap copy",
 ```
 
-#### Modify the `capacitor.config.json` File
+##### Modify the `capacitor.config.json` File
 
 Remember all of those preferences that were copied over when we initially added the Capacitor integration? They look like this in the `capacitor.config.json` file:
 
@@ -498,8 +505,7 @@ Since we were able to remove all of the Cordova plugins in this project, we don'
 
 **Note:** In your own project, you may still need some preferences based on which Cordova plugins you still have left.
 
-
-#### Remove Unused Files
+##### Remove Unused Files
 
 At this point, you no longer need any of the Cordova related files or folders in your project. You can remove all of the following:
 
@@ -513,4 +519,6 @@ $ rm -rf platforms plugins config.xml
 
 ## Conclusion
 
-Your application has been fully converted to Capacitor at this point. You may or may not still be including some Cordova plugins, but Capacitor is the only system being used to build your iOS and Android applications for this project.
+The sample application has been fully converted to Capacitor at this point. You may or may not still be including some Cordova plugins, but Capacitor is the only system being used to build your iOS and Android applications for this project.
+
+When performing the phase 2 steps on your own application, you may run into some native interactions that are not as straight forward to port over to Capacitor. For example, we have several guides on using push notifications within Capacitor applications, and you may need to consult one of those. If you run into any issues that you need help on, please feel free to reach out to us to discuss support and advisory options.
