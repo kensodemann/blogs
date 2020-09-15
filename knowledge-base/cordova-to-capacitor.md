@@ -106,7 +106,7 @@ Installing and configuring Capacitor is a multi-step process, but each step is v
 You should never ever do any work in the main branch of your application. You should always use a "branch and merge" strategy for every change you make, even if you are the only developer on your application. This way, should you decide that whatever changes you are making are not a path you want to go down, you just need to abandon the branch rather than undo a bunch of commits. This advice holds especially true here where you are replacing a whole section of your stack. Even though this process is very easy, you should still approach it with care.
 
 ```bash
-git checkout -b feature/convertToCapacitor
+$ git checkout -b feature/convertToCapacitor
 ```
 
 Also remember to commit early and commit often. Always make small commits as you go, and then squash them into a single commit before merging your branch into the main branch.
@@ -164,8 +164,8 @@ Change the `appId` and the `appName` to match what you currently have in the `co
 Let's add the iOS and Android platforms:
 
 ```bash
-ionic cap add ios
-ionic cap add android
+$ ionic cap add ios
+$ ionic cap add android
 ```
 
 The output of these two commands is similar. Notice that the Compatible Cordova plugins that we have in our project are automatically installed while the incompatible plugins are ignored.
