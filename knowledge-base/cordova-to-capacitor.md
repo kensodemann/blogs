@@ -60,7 +60,7 @@ This step takes about 30-6o minutes for simple projects but can take significant
 
 We will dive into this step in more detail in its own section of this walkthrough.
 
-## Overview of the Tutorial
+## About the Tutorial
 
 For this tutorial, we will:
 
